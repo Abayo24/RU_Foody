@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "632043835551",
+    "project_id": "rufoody-7dfa5",
+    "storage_bucket": "rufoody-7dfa5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:632043835551:android:031d848f7f944ef3d352aa",
+        "android_client_info": {
+          "package_name": "com.example.ru_foody"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "632043835551-mrmhletllnsjln6tjjpvl1hlg4au68fg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOQsWpspLjNLp4Fj1smb4RaHFzRnP4ew4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "632043835551-mrmhletllnsjln6tjjpvl1hlg4au68fg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

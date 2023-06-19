@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">RU_Foody</string>
+    <string name="home">Home</string>
+    <string name="RUFoody">RUFoody</string>
+    <string name="order_now">Order Now</string>
+    <string name="signup">SignUp</string>
+    <string name="sua">Signup As</string>
+    <string name="sign_in">SignIn</string>
+    <string name="sign_with_email">Login with Email</string>
+    <string name="sign_with_phone">Login with Phone</string>
+    <string name="dhaa">Don\'t Have an Account?</string>
+    <string name="chef">Chef</string>
+    <string name="customer">Customer</string>
+    <string name="delivery">Delivery Person</string>
+
+    <string name="register_chef">Register As Chef</string>
+    <string name="first">Full Name</string>
+    <string name="mobile">Mobile Number</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="c_password">Confirm Password</string>
+    <string name="back">back</string>
+    <string name="Reg_in_progress">"Registration in Progress, Please Wait…</string>
+
+    <string name="delivery_person">Register as Delivery Person</string>
+    <string name="reg_customer">Register as Customer</string>
+
+    <string name="login_email">Login With Email</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="login">Login</string>
+    <string name="dhaac">Don\'t Have an Account? Create</string>
+
+    <string name="otp">Send OTP</string>
+    <string name="lwn">Login with Mobile Number</string>
+    <string name="eotp">Enter The OTP</string>
+    <string name="verify">Verify</string>
+    <string name="resend">Resend the Code</string>
+    <string name="Otp">------</string>
+
+
+</resources>
