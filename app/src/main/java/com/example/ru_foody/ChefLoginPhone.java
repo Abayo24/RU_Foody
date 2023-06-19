@@ -3,6 +3,7 @@ package com.example.ru_foody;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,7 @@ public class ChefLoginPhone extends AppCompatActivity {
     TextInputLayout mobile_number;
     Button sendOtp;
     TextView signup;
+    ImageView Back;
     FirebaseAuth Fauth;
     String number;
 
@@ -28,6 +30,7 @@ public class ChefLoginPhone extends AppCompatActivity {
         mobile_number = findViewById(R.id.mobile_no);
         sendOtp = findViewById(R.id.otp_btn);
         signup = findViewById(R.id.create);
+        Back = findViewById(R.id.back);
 
         Fauth = FirebaseAuth.getInstance();
 
@@ -39,6 +42,10 @@ public class ChefLoginPhone extends AppCompatActivity {
         });
 
         signup.setOnClickListener(v -> startActivity(new Intent(ChefLoginPhone.this, ChefRegistration.class)));
+
+        Back = findViewById(R.id.back);
+
+        Back.setOnClickListener(v -> onBackPressed());
 
     }
 }

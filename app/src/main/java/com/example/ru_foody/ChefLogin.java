@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ public class ChefLogin extends AppCompatActivity {
 
     TextInputLayout email, password;
     Button login;
+    ImageView Back;
     ProgressBar mDialog;
     TextView forgotPassword, signup;
     FirebaseAuth Fauth;
@@ -32,6 +34,8 @@ public class ChefLogin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chef_login);
+
+        Back = findViewById(R.id.back);
 
         try{
             email = findViewById(R.id.email);
@@ -93,6 +97,8 @@ public class ChefLogin extends AppCompatActivity {
         }catch (Exception e){
             Toast.makeText(this,e.getMessage(), Toast.LENGTH_SHORT).show();
         }
+
+        Back.setOnClickListener(v -> onBackPressed());
     }
     String emailpattern = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}";
 

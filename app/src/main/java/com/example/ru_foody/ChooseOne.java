@@ -46,17 +46,14 @@ public class ChooseOne extends AppCompatActivity {
             if (type.equals("Email")){
                 Intent L = new Intent(ChooseOne.this, Login.class);
                 startActivity(L);
-                finish();
             }
             if (type.equals("Phone")){
                 Intent P = new Intent(ChooseOne.this, LoginPhone.class);
                 startActivity(P);
-                finish();
             }
             if (type.equals("Signup")){
                 Intent S = new Intent(ChooseOne.this, Registration.class);
                 startActivity(S);
-                finish();
             }
         });
 
@@ -64,17 +61,14 @@ public class ChooseOne extends AppCompatActivity {
             if (type.equals("Email")){
                 Intent E = new Intent(ChooseOne.this, DeliveryLogin.class);
                 startActivity(E);
-                finish();
             }
             if (type.equals("Phone")){
                 Intent D = new Intent(ChooseOne.this, DeliveryLoginPhone.class);
                 startActivity(D);
-                finish();
             }
             if (type.equals("Signup")){
                 Intent R = new Intent(ChooseOne.this, DeliveryRegistration.class);
                 startActivity(R);
-                finish();
             }
         });
 

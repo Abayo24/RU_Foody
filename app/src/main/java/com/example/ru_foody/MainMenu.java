@@ -23,21 +23,18 @@ public class MainMenu extends AppCompatActivity {
             Intent signemail = new Intent(MainMenu.this,ChooseOne.class);
             signemail.putExtra("Home", "Email");
             startActivity(signemail);
-            finish();
         });
 
         signinphone.setOnClickListener(v -> {
             Intent signphone = new Intent(MainMenu.this,ChooseOne.class );
             signphone.putExtra("Home", "Phone");
             startActivity(signphone);
-            finish();
         });
 
         signup.setOnClickListener(v -> {
             Intent signup = new Intent(MainMenu.this,ChooseOne.class);
             signup.putExtra("Home", "Signup");
             startActivity(signup);
-            finish();
         });
     }
 
