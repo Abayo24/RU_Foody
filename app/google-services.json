@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "632043835551",
+    "firebase_url": "https://rufoody-7dfa5-default-rtdb.firebaseio.com",
     "project_id": "rufoody-7dfa5",
     "storage_bucket": "rufoody-7dfa5.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "632043835551-0e67ihghphgegmq9j41ubeq9i8aa0dgn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ru_foody",
+            "certificate_hash": "05e7fbe3fff18722d97a464b83e3024dab8f8359"
+          }
+        },
         {
           "client_id": "632043835551-mrmhletllnsjln6tjjpvl1hlg4au68fg.apps.googleusercontent.com",
           "client_type": 3

@@ -1,6 +1,7 @@
 package com.example.ru_foody;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.hbb20.CountryCodePicker;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -24,6 +26,8 @@ public class ChefRegistration extends AppCompatActivity {
     TextInputLayout chname, chmobile, chemail, chpassword, chcpassword;
     Button chsignup;
     ImageView Back;
+
+    CountryCodePicker Cpp;
 
     ProgressBar mDialog;
     FirebaseAuth FAuth;
@@ -42,6 +46,7 @@ public class ChefRegistration extends AppCompatActivity {
         chpassword= findViewById(R.id.ch_password);
         chcpassword = findViewById(R.id.chc_password);
         Back = findViewById(R.id.back);
+        Cpp = findViewById(R.id.Cpp);
 
 
         chsignup = findViewById(R.id.ch_signup_btn);
@@ -83,8 +88,6 @@ public class ChefRegistration extends AppCompatActivity {
                             String user_id = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
                             databaseReference = FirebaseDatabase.getInstance().getReference("User").child(user_id);
 
-                            user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                            databaseReference = FirebaseDatabase.getInstance().getReference("User").child(user_id);
                             //set user's role to Chef
                             final HashMap<String, String> hashMap = new HashMap<>();
                             hashMap.put("Role", role);
@@ -110,18 +113,26 @@ public class ChefRegistration extends AppCompatActivity {
                                                     AlertDialog.Builder builder1 = new AlertDialog.Builder(ChefRegistration.this);
                                                     builder1.setMessage("You Have Registered! Make Sure To Verify Your Email");
                                                     builder1.setCancelable(false);
-                                                    builder1.setPositiveButton("Ok", (dialog, which) -> dialog.dismiss());
-                                                    AlertDialog Alert = builder1.create();
-                                                    Alert.show();
+                                                    builder1.setPositiveButton("Ok", (dialog, which) -> {
+                                                        dialog.dismiss();
+
+                                                        String mobilenumber = Cpp.getSelectedCountryCodeWithPlus() + mobile;
+                                                        Intent intent = new Intent(ChefRegistration.this, ChefVerifyPhone.class);
+                                                        intent.putExtra("mobilenumber", mobilenumber);
+                                                        startActivity(intent);
+                                                    });
+                                                    AlertDialog alert = builder1.create();
+                                                    alert.show();
                                                 } else {
                                                     mDialog.dismiss();
-                                                    ReusableCodeForAll.ShowAlert(ChefRegistration.this, "Error", Objects.requireNonNull(task111.getException()).getMessage());
+                                                    ReusableCodeForAll.ShowAlert(ChefRegistration.this, "Error", Objects.requireNonNull(task.getException()).getMessage());
                                                 }
+
                                             });
                                         });
 
                             });
-                    }else{
+                        }else{
                             mDialog.dismiss();
                             AlertDialog.Builder builder1 = new AlertDialog.Builder(ChefRegistration.this);
                             builder1.setMessage("Email already exists. Please use a different email.");
@@ -171,7 +182,7 @@ public class ChefRegistration extends AppCompatActivity {
             chmobile.setErrorEnabled(true);
             chmobile.setError("Enter your Mobile Number");
         }else{
-            if(mobile.length() < 10){
+            if(mobile.length() < 9){
                 chmobile.setErrorEnabled(true);
                 chmobile.setError("Invalid Mobile Number");
             }else {
@@ -184,11 +195,12 @@ public class ChefRegistration extends AppCompatActivity {
             chemail.setError("Enter your Email");
         }else {
             if (email.matches(emailpattern)){
+                isValid_email = true;
             }else {
                 chemail.setErrorEnabled(true);
                 chemail.setError("Enter a Valid Email Id");
             }
-            isValid_email = true;
+
         }
 
         if(TextUtils.isEmpty(password)){

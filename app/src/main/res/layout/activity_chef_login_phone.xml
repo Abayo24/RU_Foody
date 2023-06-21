@@ -45,21 +45,41 @@
         </LinearLayout>
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/mobile_no"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <LinearLayout
+            android:id="@+id/phoneNumberLayout"
             android:layout_width="350dp"
-            android:layout_height="70dp"
+            android:layout_height="90dp"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            app:boxStrokeColor="@color/purple">
+            android:orientation="horizontal">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/Cpp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeColor="@color/purple"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:hint="@string/mobile"
-                android:inputType="number" />
-        </com.google.android.material.textfield.TextInputLayout>
+                app:ccp_defaultNameCode="KE"
+                android:layout_gravity="center"
+                app:ccp_showFlag="true"
+                app:ccp_showNameCode="true" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/mobile_no"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                app:boxStrokeColor="@color/purple">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/mobile"
+                    android:inputType="phone" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/otp_btn"

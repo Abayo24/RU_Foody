@@ -23,7 +23,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-public class ChefVerifyPhone extends AppCompatActivity {
+public class VerifyPhone extends AppCompatActivity {
 
     String verification_id;
     FirebaseAuth FAuth;
@@ -35,13 +35,13 @@ public class ChefVerifyPhone extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chef_verify_phone);
+        setContentView(R.layout.activity_verify_phone);
 
         mobile = getIntent().getStringExtra("mobilenumber").trim();
 
-        enter_code = findViewById(R.id.code);
-        verify = findViewById(R.id.verify);
-        resend = findViewById(R.id.resend);
+        enter_code = findViewById(R.id.c_code);
+        verify = findViewById(R.id.c_verify);
+        resend = findViewById(R.id.resendd);
         txt = findViewById(R.id.txt);
         FAuth = FirebaseAuth.getInstance();
 
@@ -69,7 +69,7 @@ public class ChefVerifyPhone extends AppCompatActivity {
             @Override
             public void onTick(long millisUntilFinished) {
                 txt.setVisibility(View.VISIBLE);
-                txt.setText("Resend Code within "+millisUntilFinished/1000+" seconds");
+                txt.setText("Resend Code within"+millisUntilFinished/1000+"seconds");
             }
 
             @Override
@@ -103,16 +103,12 @@ public class ChefVerifyPhone extends AppCompatActivity {
                 }
             }.start();
         });
-
     }
 
     private void resendotp(String mobile_num) {
 
         sendVerificationCode(mobile_num);
     }
-
-
-    //PhoneAuthProvider Function
 
     private void sendVerificationCode(String number) {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -145,7 +141,7 @@ public class ChefVerifyPhone extends AppCompatActivity {
 
         @Override
         public void onVerificationFailed(@NonNull FirebaseException e) {
-            Toast.makeText(ChefVerifyPhone.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(VerifyPhone.this, e.getMessage(), Toast.LENGTH_LONG).show();
 
         }
 
@@ -166,18 +162,17 @@ public class ChefVerifyPhone extends AppCompatActivity {
     private void linkCredential(PhoneAuthCredential credential) {
 
         Objects.requireNonNull(FAuth.getCurrentUser()).linkWithCredential(credential)
-                .addOnCompleteListener(ChefVerifyPhone.this, task -> {
+                .addOnCompleteListener(VerifyPhone.this, task -> {
 
                     if(task.isSuccessful()){
 
-                        Intent intent = new Intent(ChefVerifyPhone.this, MainMenu.class);
+                        Intent intent = new Intent(VerifyPhone.this, MainMenu.class);
                         startActivity(intent);
                         finish();
                     }else{
-                        ReusableCodeForAll.ShowAlert(ChefVerifyPhone.this, "Error", Objects.requireNonNull(task.getException()).getMessage());
+                        ReusableCodeForAll.ShowAlert(VerifyPhone.this, "Error", Objects.requireNonNull(task.getException()).getMessage());
                     }
 
                 });
     }
-
 }

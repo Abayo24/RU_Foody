@@ -35,7 +35,7 @@
     <string name="eotp">Enter The OTP</string>
     <string name="verify">Verify</string>
     <string name="resend">Resend the Code</string>
-    <string name="Otp">------</string>
+    <string name="Otp">Enter The OTP</string>
 
 
 </resources>

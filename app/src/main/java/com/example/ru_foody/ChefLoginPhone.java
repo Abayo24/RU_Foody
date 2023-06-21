@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.hbb20.CountryCodePicker;
 
 import java.util.Objects;
 
@@ -22,6 +23,8 @@ public class ChefLoginPhone extends AppCompatActivity {
     FirebaseAuth Fauth;
     String number;
 
+    CountryCodePicker Cpp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,19 +34,21 @@ public class ChefLoginPhone extends AppCompatActivity {
         sendOtp = findViewById(R.id.otp_btn);
         signup = findViewById(R.id.create);
         Back = findViewById(R.id.back);
+        Cpp = findViewById(R.id.Cpp);
 
         Fauth = FirebaseAuth.getInstance();
 
         sendOtp.setOnClickListener(v -> {
-            number = Objects.requireNonNull(mobile_number.getEditText()).toString().trim();
+            number = Objects.requireNonNull(mobile_number.getEditText()).getText().toString().trim();
+            String mobilenumber = Cpp.getSelectedCountryCodeWithPlus() + number;
             Intent b = new Intent(ChefLoginPhone.this, ChefSendOtp.class);
+
+            b.putExtra("mobilenumber", mobilenumber);
             startActivity(b);
             finish();
         });
 
         signup.setOnClickListener(v -> startActivity(new Intent(ChefLoginPhone.this, ChefRegistration.class)));
-
-        Back = findViewById(R.id.back);
 
         Back.setOnClickListener(v -> onBackPressed());
 

@@ -23,7 +23,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-public class ChefVerifyPhone extends AppCompatActivity {
+public class DeliveryVerifyPhone extends AppCompatActivity {
 
     String verification_id;
     FirebaseAuth FAuth;
@@ -35,14 +35,14 @@ public class ChefVerifyPhone extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chef_verify_phone);
+        setContentView(R.layout.activity_delivery_verify_phone);
 
         mobile = getIntent().getStringExtra("mobilenumber").trim();
 
-        enter_code = findViewById(R.id.code);
-        verify = findViewById(R.id.verify);
-        resend = findViewById(R.id.resend);
-        txt = findViewById(R.id.txt);
+        enter_code = findViewById(R.id.d_code);
+        verify = findViewById(R.id.d_verify);
+        resend = findViewById(R.id.d_resend);
+        txt = findViewById(R.id.d_txt);
         FAuth = FirebaseAuth.getInstance();
 
         resend.setVisibility(View.INVISIBLE);
@@ -103,7 +103,6 @@ public class ChefVerifyPhone extends AppCompatActivity {
                 }
             }.start();
         });
-
     }
 
     private void resendotp(String mobile_num) {
@@ -145,7 +144,7 @@ public class ChefVerifyPhone extends AppCompatActivity {
 
         @Override
         public void onVerificationFailed(@NonNull FirebaseException e) {
-            Toast.makeText(ChefVerifyPhone.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(DeliveryVerifyPhone.this, e.getMessage(), Toast.LENGTH_LONG).show();
 
         }
 
@@ -166,18 +165,17 @@ public class ChefVerifyPhone extends AppCompatActivity {
     private void linkCredential(PhoneAuthCredential credential) {
 
         Objects.requireNonNull(FAuth.getCurrentUser()).linkWithCredential(credential)
-                .addOnCompleteListener(ChefVerifyPhone.this, task -> {
+                .addOnCompleteListener(DeliveryVerifyPhone.this, task -> {
 
                     if(task.isSuccessful()){
 
-                        Intent intent = new Intent(ChefVerifyPhone.this, MainMenu.class);
+                        Intent intent = new Intent(DeliveryVerifyPhone.this, MainMenu.class);
                         startActivity(intent);
                         finish();
                     }else{
-                        ReusableCodeForAll.ShowAlert(ChefVerifyPhone.this, "Error", Objects.requireNonNull(task.getException()).getMessage());
+                        ReusableCodeForAll.ShowAlert(DeliveryVerifyPhone.this, "Error", Objects.requireNonNull(task.getException()).getMessage());
                     }
 
                 });
     }
-
 }

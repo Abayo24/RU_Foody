@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,19 +22,20 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-public class ChefVerifyPhone extends AppCompatActivity {
+public class SendOtp extends AppCompatActivity {
 
     String verification_id;
     FirebaseAuth FAuth;
     TextInputLayout enter_code;
-    TextView resend, txt;
+    TextView txt;
     Button verify;
+    TextView resend;
     String mobile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chef_verify_phone);
+        setContentView(R.layout.activity_send_otp);
 
         mobile = getIntent().getStringExtra("mobilenumber").trim();
 
@@ -56,7 +56,7 @@ public class ChefVerifyPhone extends AppCompatActivity {
             resend.setVisibility(View.INVISIBLE);
 
             if (code.length() == 0 || code.length() < 6){
-                enter_code.setError("Enter The Correct Code");
+                enter_code.setError("Enter Code");
                 enter_code.requestFocus();
                 return;
             }
@@ -103,16 +103,12 @@ public class ChefVerifyPhone extends AppCompatActivity {
                 }
             }.start();
         });
-
     }
 
     private void resendotp(String mobile_num) {
 
         sendVerificationCode(mobile_num);
     }
-
-
-    //PhoneAuthProvider Function
 
     private void sendVerificationCode(String number) {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -133,19 +129,17 @@ public class ChefVerifyPhone extends AppCompatActivity {
         public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
 
             String code = phoneAuthCredential.getSmsCode();
-            if(code != null){
-                TextInputEditText editText = (TextInputEditText) enter_code.getEditText();
-                if (editText != null) {
-                    editText.setText(code);
-                }
+            if (code != null) {
+                Objects.requireNonNull(enter_code.getEditText()).setText(code);
                 verifyCode(code);
             }
+
 
         }
 
         @Override
         public void onVerificationFailed(@NonNull FirebaseException e) {
-            Toast.makeText(ChefVerifyPhone.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(SendOtp.this, e.getMessage(), Toast.LENGTH_LONG).show();
 
         }
 
@@ -160,24 +154,18 @@ public class ChefVerifyPhone extends AppCompatActivity {
     private void verifyCode(String code) {
 
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verification_id, code);
-        linkCredential(credential);
+        signInWithPhone(credential);
     }
 
-    private void linkCredential(PhoneAuthCredential credential) {
-
-        Objects.requireNonNull(FAuth.getCurrentUser()).linkWithCredential(credential)
-                .addOnCompleteListener(ChefVerifyPhone.this, task -> {
-
-                    if(task.isSuccessful()){
-
-                        Intent intent = new Intent(ChefVerifyPhone.this, MainMenu.class);
-                        startActivity(intent);
+    private void signInWithPhone(PhoneAuthCredential credential) {
+        FAuth.signInWithCredential(credential)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()){
+                        startActivity(new Intent(SendOtp.this, CustomerFoodPanel_BottomNavigation.class));
                         finish();
                     }else{
-                        ReusableCodeForAll.ShowAlert(ChefVerifyPhone.this, "Error", Objects.requireNonNull(task.getException()).getMessage());
+                        ReusableCodeForAll.ShowAlert(SendOtp.this, "Error", Objects.requireNonNull(task.getException()).getMessage());
                     }
-
                 });
     }
-
 }

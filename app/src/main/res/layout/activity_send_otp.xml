@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginPhone">
+    tools:context=".SendOtp">
 
     <LinearLayout
         android:id="@+id/input_fields"
@@ -39,65 +39,55 @@
                 android:layout_width="340dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/lwn"
+                android:text="@string/eotp"
                 android:textColor="@color/purple"
                 android:textSize="35sp" />
         </LinearLayout>
 
 
-        <LinearLayout
-            android:id="@+id/phoneNumberLayout"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/code"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="350dp"
-            android:layout_height="90dp"
+            android:layout_height="70dp"
             android:layout_gravity="center"
-            android:orientation="horizontal">
+            android:layout_marginTop="20dp"
+            app:boxStrokeColor="@color/purple">
 
-            <com.hbb20.CountryCodePicker
-                android:id="@+id/Cpp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                app:boxStrokeColor="@color/purple"
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                app:ccp_defaultNameCode="KE"
-                android:layout_gravity="center"
-                app:ccp_showFlag="true"
-                app:ccp_showNameCode="true" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/cu_mobile_no"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_gravity="center"
-                app:boxStrokeColor="@color/purple">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/mobile"
-                    android:inputType="phone" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:hint="@string/Otp"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/otp_btn"
+            android:id="@+id/verify"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:background="@drawable/purple_btn"
-            android:text="@string/otp" />
+            android:text="@string/verify"/>
 
         <TextView
-            android:id="@+id/cu_create"
+            android:id="@+id/resend"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="@string/dhaac"
+            android:text="@string/resend"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txt"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text=""
             android:textSize="16sp" />
 
     </LinearLayout>

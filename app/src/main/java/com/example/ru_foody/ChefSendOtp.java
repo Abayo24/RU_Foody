@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,9 +37,9 @@ public class ChefSendOtp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chef_send_otp);
 
-        mobile = getIntent().getStringExtra("mobileNumber").trim();
+        mobile = getIntent().getStringExtra("mobilenumber").trim();
 
-        enter_code = findViewById(R.id.otp);
+        enter_code = findViewById(R.id.code);
         verify = findViewById(R.id.verify);
         resend = findViewById(R.id.resend);
         txt = findViewById(R.id.txt);
@@ -53,7 +52,7 @@ public class ChefSendOtp extends AppCompatActivity {
 
         verify.setOnClickListener(v -> {
 
-            String code = Objects.requireNonNull(enter_code.getEditText()).toString().trim();
+            String code = Objects.requireNonNull(enter_code.getEditText()).getText().toString().trim();
             resend.setVisibility(View.INVISIBLE);
 
             if (code.length() == 0 || code.length() < 6){
@@ -70,7 +69,7 @@ public class ChefSendOtp extends AppCompatActivity {
             @Override
             public void onTick(long millisUntilFinished) {
                 txt.setVisibility(View.VISIBLE);
-                txt.setText("Resend Code within"+millisUntilFinished/1000+"seconds");
+                txt.setText("Resend Code within "+millisUntilFinished/1000+" seconds");
             }
 
             @Override
@@ -91,7 +90,7 @@ public class ChefSendOtp extends AppCompatActivity {
                 @Override
                 public void onTick(long millisUntilFinished) {
                     txt.setVisibility(View.VISIBLE);
-                    txt.setText("Resend Code within"+millisUntilFinished/1000+"seconds");
+                    txt.setText("Resend Code within "+millisUntilFinished/1000+" seconds");
 
                 }
 
@@ -106,9 +105,9 @@ public class ChefSendOtp extends AppCompatActivity {
         });
     }
 
-    private void resendotp(String mobile) {
+    private void resendotp(String mobile_num) {
 
-        sendVerificationCode(mobile);
+        sendVerificationCode(mobile_num);
     }
 
     private void sendVerificationCode(String number) {
@@ -130,11 +129,8 @@ public class ChefSendOtp extends AppCompatActivity {
         public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
 
             String code = phoneAuthCredential.getSmsCode();
-            if(code != null){
-                EditText editText = enter_code.getEditText();
-                if (editText != null) {
-                    editText.setText(code);
-                }
+            if (code != null) {
+                Objects.requireNonNull(enter_code.getEditText()).setText(code);
                 verifyCode(code);
             }
 
