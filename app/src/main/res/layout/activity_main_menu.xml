@@ -16,50 +16,37 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/RUFoody"
-            android:textColor="@color/purple"
-            android:textSize="25sp"
-            android:layout_marginTop="50dp"/>
-
-        <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/sign_in"
+            android:text="@string/login"
             android:textColor="@color/purple"
-            android:textSize="25sp"
+            android:textSize="35sp"
             android:gravity="center"
-            android:layout_marginTop="20sp"/>
+            android:layout_marginTop="50dp"/>
 
         <Button
             android:id="@+id/signwithemail"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50sp"
+            android:layout_marginTop="20sp"
             android:gravity="center"
             android:layout_gravity="center"
             android:padding="15sp"
             android:text="@string/sign_with_email"
             android:background="@drawable/purple_btn"
-            android:textColor="@color/white"
-            android:drawableStart="@drawable/baseline_email_24"/>
-
+            android:textColor="@color/white" />
         <Button
             android:id="@+id/signwithphone"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="@string/sign_with_phone"
             android:layout_marginTop="20sp"
-            android:padding="15sp"
+            android:padding="15dp"
             android:gravity="center"
             android:layout_gravity="center"
             android:background="@drawable/purple_btn"
-            android:textColor="@color/white"
-            android:drawableStart="@drawable/baseline_phone_24"/>
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/textView4"
