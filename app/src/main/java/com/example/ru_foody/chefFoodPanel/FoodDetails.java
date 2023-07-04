@@ -2,9 +2,9 @@ package com.example.ru_foody.chefFoodPanel;
 
 public class FoodDetails {
 
-    public String Description, Quantity, Price, Dish, ImageURL, RandomUID, ChefId;
+    private String Description, Quantity, Price, Dish, ImageURL, RandomUID, ChefId;
 
-    public FoodDetails(String dish, int quantity, double price, String description, String imageUrl, String randomUid, String chefId) {
+    public FoodDetails() {
         // Default constructor required for Firebase Realtime Database
     }
     public FoodDetails(String description, String quantity, String price, String dishes, String imageURL, String randomUID, String chefId) {

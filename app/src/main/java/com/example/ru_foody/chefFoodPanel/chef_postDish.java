@@ -1,13 +1,11 @@
 package com.example.ru_foody.chefFoodPanel;
 
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
@@ -44,19 +42,19 @@ public class chef_postDish extends AppCompatActivity {
     Button postDishButton;
     Spinner dishesSpinner;
     TextInputLayout descriptionInput, quantityInput, priceInput;
-    String description, quantity, price, dish, randomUid;
+    String description, quantity, price, dish, RandomUID;
     Uri imageUri;
 
     Uri resultUri;
     ProgressBar progressBar;
 
     FirebaseStorage storage;
-    StorageReference storageReference;
+    StorageReference storageReference, imageRef;
     FirebaseDatabase firebaseDatabase;
     FirebaseFirestore firebaseFirestore;
+
     Task<Void> databaseReference;
     DatabaseReference dataRef;
-    DatabaseReference foodDetailsRef;
     FirebaseAuth firebaseAuth;
     String fName, emailid, mobileno, chefId;
 
@@ -82,12 +80,10 @@ public class chef_postDish extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
-
-
-
         try {
-            String userId = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
-            dataRef = FirebaseDatabase.getInstance().getReference("Chef").child(userId);
+            String userid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+            dataRef= FirebaseDatabase.getInstance().getReference("Chef").child(userid);
+
             dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -197,30 +193,32 @@ public class chef_postDish extends AppCompatActivity {
 
     private void uploadImage() {
         if (resultUri != null) {
-           uploadToFirebase(resultUri);
-
-        }else {
-            Toast.makeText(chef_postDish.this,"Please Select Image", Toast.LENGTH_SHORT).show();
+            if (TextUtils.isEmpty(RandomUID)) {
+                RandomUID = UUID.randomUUID().toString(); // Generate a random UUID if RandomUID is empty
+            }
+            uploadToFirebase(resultUri);
+        } else {
+            Toast.makeText(chef_postDish.this, "Please Select Image", Toast.LENGTH_SHORT).show();
         }
 
     }
 
-    private void uploadToFirebase(Uri uri1) {
+    private void uploadToFirebase(Uri Uri1) {
         progressBar.setVisibility(View.VISIBLE);
+        chefId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        imageRef = storageReference.child(RandomUID);
+        UploadTask uploadTask = imageRef.putFile(Uri1);
 
-        StorageReference imageRef = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(uri1));
-        String chefId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-        UploadTask uploadTask = imageRef.putFile(resultUri);
-
-        uploadTask.addOnSuccessListener(taskSnapshot -> {
-            imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
-                String imageUrl = String.valueOf(uri);
+        uploadTask.addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                String imageUrl = Objects.requireNonNull(task.getResult()).toString();
 
                 // Create FoodDetails object with the data
-                FoodDetails foodDetails = new FoodDetails(dish, quantity, price, description, imageUrl, randomUid, chefId);
-                randomUid = UUID.randomUUID().toString();
-                databaseReference = FirebaseDatabase.getInstance().getReference("FoodDetails").child(fName).child(mobileno).child(emailid).child(randomUid).setValue(foodDetails)
-                        .addOnCompleteListener(task -> {
+                FoodDetails foodDetails = new FoodDetails(dish, quantity, price, description, imageUrl, RandomUID, chefId);
+                databaseReference = FirebaseDatabase.getInstance().getReference("FoodDetails ")
+                        .child(chefId)
+                        .setValue(foodDetails)
+                        .addOnCompleteListener(task1 -> {
                             progressBar.setVisibility(View.GONE);
                             Toast.makeText(chef_postDish.this, "Dish Posted Successfully!", Toast.LENGTH_SHORT).show();
                         })
@@ -228,8 +226,11 @@ public class chef_postDish extends AppCompatActivity {
                             progressBar.setVisibility(View.GONE);
                             Toast.makeText(chef_postDish.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         });
-            });
-        }).addOnProgressListener(taskSnapshot -> {
+            } else {
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(chef_postDish.this, "Failed to retrieve image URL.", Toast.LENGTH_SHORT).show();
+            }
+        })).addOnProgressListener(taskSnapshot -> {
             progressBar.setVisibility(View.VISIBLE);
             double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
             progressBar.setProgress((int) progress);
@@ -241,13 +242,6 @@ public class chef_postDish extends AppCompatActivity {
         });
     }
 
-    private String getFileExtension(Uri mUri){
-
-        ContentResolver cr = getContentResolver();
-        MimeTypeMap mime = MimeTypeMap.getSingleton();
-        return mime.getExtensionFromMimeType(cr.getType(mUri));
-
-    }
 
 
     private void onSelectImageClick() {

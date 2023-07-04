@@ -2,13 +2,22 @@ package com.example.ru_foody.chefFoodPanel;
 
 public class Chef {
 
-    private String FName, EmailId, MobileNo, Password, ConfirmPassword;
+    private String FName, EmailId, MobileNo, Password, ConfirmPassword, ChefId;
 
     public Chef() {
         // Default constructor
     }
 
-    public Chef(String fName, String emailId, String mobileNo, String password, String confirmPassword) {
+    public String getChefId() {
+        return ChefId;
+    }
+
+    public void setChefId(String chefId) {
+        ChefId = chefId;
+    }
+
+    public Chef(String chefId, String fName, String emailId, String mobileNo, String password, String confirmPassword) {
+        ChefId = chefId;
         FName = fName;
         EmailId = emailId;
         MobileNo = mobileNo;

@@ -47,7 +47,13 @@
     <string name="description">Description</string>
     <string name="image_upload">image upload</string>
 
-    <string name="uploading">Uploading...</string>
+    <string name="cart">Cart</string>
+    <string name="orders">Orders</string>
+    <string name="track">Track</string>
+    <string name="profile">Profile</string>
+
+    <string name="pending">Pending Orders</string>
+    <string name="ship">Ship Orders</string>
 
 
 
