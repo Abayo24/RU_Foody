@@ -34,7 +34,7 @@
 
         <TextView
             android:layout_width="105dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:id="@+id/textView"
             android:padding="8dp"
             android:text="@string/dishName"

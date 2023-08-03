@@ -20,6 +20,14 @@ public class DeliveryFoodPanel_BottomNavigation extends AppCompatActivity implem
         setContentView(R.layout.activity_delivery_food_panel_bottom_navigation);
         BottomNavigationView navigationView = findViewById(R.id.deliveryBottomNavigation);
         navigationView.setOnItemSelectedListener(this);
+        String name = getIntent().getStringExtra("PAGE");
+        if (name != null){
+            if (name.equalsIgnoreCase("DeliveryOrderpage")) {
+                loadDeliveryFragment(new DeliveryPendingOrderFragment());
+            }
+        }else{
+            loadDeliveryFragment(new DeliveryPendingOrderFragment());
+        }
     }
 
     @Override

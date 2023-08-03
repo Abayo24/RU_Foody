@@ -217,6 +217,7 @@ public class chef_postDish extends AppCompatActivity {
                 FoodDetails foodDetails = new FoodDetails(dish, quantity, price, description, imageUrl, RandomUID, chefId);
                 databaseReference = FirebaseDatabase.getInstance().getReference("FoodDetails ")
                         .child(chefId)
+                        .child(RandomUID)
                         .setValue(foodDetails)
                         .addOnCompleteListener(task1 -> {
                             progressBar.setVisibility(View.GONE);

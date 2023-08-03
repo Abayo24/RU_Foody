@@ -17,6 +17,14 @@ public class FoodDetails {
         ChefId = chefId;
     }
 
+    public String getDish() {
+        return Dish;
+    }
+
+    public void setDish(String dish) {
+        Dish = dish;
+    }
+
     public String getDescription() {
         return Description;
     }
@@ -39,14 +47,6 @@ public class FoodDetails {
 
     public void setPrice(String price) {
         Price = price;
-    }
-
-    public String getDish() {
-        return Dish;
-    }
-
-    public void setDish(String dish) {
-        Dish = dish;
     }
 
     public String getImageURL() {

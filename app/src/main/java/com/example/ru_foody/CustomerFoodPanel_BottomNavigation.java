@@ -6,6 +6,8 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.ru_foody.customerFoodPanel.CustomerCartFragment;
 import com.example.ru_foody.customerFoodPanel.CustomerHomeFragment;
@@ -23,6 +25,22 @@ public class CustomerFoodPanel_BottomNavigation extends AppCompatActivity implem
         setContentView(R.layout.activity_customer_food_panel_bottom_navigation);
         BottomNavigationView navigationView= findViewById(R.id.customerBottomNavigation);
         navigationView.setOnItemSelectedListener(this);
+        String name = getIntent().getStringExtra("PAGE");
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        if (name != null){
+            if (name.equalsIgnoreCase("Homepage")){
+                loadCustomerFragment(new CustomerHomeFragment());
+            }else if (name.equalsIgnoreCase("Preparingpage")){
+                loadCustomerFragment(new CustomerTrackFragment());
+            }else if (name.equalsIgnoreCase("DeliveryOrderpage")){
+                loadCustomerFragment(new CustomerTrackFragment());
+            }else if (name.equalsIgnoreCase("Thankyoupage")){
+                loadCustomerFragment(new CustomerHomeFragment());
+            }
+        }else{
+            loadCustomerFragment(new CustomerHomeFragment());
+        }
     }
 
     @Override

@@ -54,10 +54,12 @@
 
     <string name="pending">Pending Orders</string>
     <string name="ship">Ship Orders</string>
+    <string name="burger">Burger</string>
+    <string name="priceMoney">Price: Ksh300</string>
 
-
-
-
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="dish_name_format">Dish Name: %s</string>
 
 
 
