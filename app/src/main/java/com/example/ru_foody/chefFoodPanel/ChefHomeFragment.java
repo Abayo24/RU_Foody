@@ -52,6 +52,23 @@ public class ChefHomeFragment extends Fragment {
 
         String userid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         dataRef = FirebaseDatabase.getInstance().getReference("Chef").child(userid);
+
+        dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String mobileNumber = Objects.requireNonNull(snapshot.child("Mobile Number").getValue()).toString();
+                String email = Objects.requireNonNull(snapshot.child("Email").getValue()).toString();
+                String fullName = Objects.requireNonNull(snapshot.child("Full Name").getValue()).toString();
+                Log.d("DebugFoody", "user data : " + "mobile number : " + mobileNumber + " email : " + email + " Full name : " + fullName);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("DebugFoody", "error : " + error);
+            }
+        });
+
+        //you can clear this code below
         dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
