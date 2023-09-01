@@ -2,6 +2,7 @@ package com.example.ru_foody.chefFoodPanel;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,9 @@ public class ChefHomeAdapter extends RecyclerView.Adapter<ChefHomeAdapter.ViewHo
         final UpdateDishModel updateDishModel = updateDishModelList.get(position);
         holder.Dish.setText(updateDishModel.getDish());
         String randomUID = updateDishModel.getRandomUID();
+        Log.d("DebugFoody", "Random UID: " + randomUID);
         holder.itemView.setOnClickListener(v -> {
+            Log.d("DebugFoody", "Random UID (before starting activity): " + randomUID);
             Intent intent = new Intent(mcont, UpdateDelete_Dish.class);
             intent.putExtra("updatedeletedish", randomUID);
             mcont.startActivity(intent);

@@ -62,7 +62,6 @@
     <string name="dish_name_format">Dish Name: %s</string>
 
 
-
     <string-array name="DishName">
         <item>Thepla</item>
         <item>Dal Rice</item>

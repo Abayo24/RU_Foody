@@ -90,7 +90,7 @@ public class chef_postDish extends AppCompatActivity {
 
                     Chef chef = snapshot.getValue(Chef.class);
                     assert chef != null;
-                    fName = chef.getFName();
+                    fName = chef.getFname();
                     emailid = chef.getEmailId();
                     mobileno = chef.getMobileNo();
 
@@ -215,7 +215,7 @@ public class chef_postDish extends AppCompatActivity {
 
                 // Create FoodDetails object with the data
                 FoodDetails foodDetails = new FoodDetails(dish, quantity, price, description, imageUrl, RandomUID, chefId);
-                databaseReference = FirebaseDatabase.getInstance().getReference("FoodDetails ")
+                databaseReference = FirebaseDatabase.getInstance().getReference("FoodDetails")
                         .child(chefId)
                         .child(RandomUID)
                         .setValue(foodDetails)

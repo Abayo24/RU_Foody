@@ -2,6 +2,7 @@ package com.example.ru_foody.chefFoodPanel;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -60,6 +61,7 @@ public class ChefHomeFragment extends Fragment {
                 String email = Objects.requireNonNull(snapshot.child("Email").getValue()).toString();
                 String fullName = Objects.requireNonNull(snapshot.child("Full Name").getValue()).toString();
                 Log.d("DebugFoody", "user data : " + "mobile number : " + mobileNumber + " email : " + email + " Full name : " + fullName);
+                chefDishes();
             }
 
             @Override
@@ -68,23 +70,6 @@ public class ChefHomeFragment extends Fragment {
             }
         });
 
-        //you can clear this code below
-        dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Chef chef = snapshot.getValue(Chef.class);
-                assert chef != null;
-                fName = chef.getFName();
-                emailid = chef.getEmailId();
-                mobileno = chef.getMobileNo();
-                chefDishes();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
         return v;
 
     }
@@ -100,6 +85,7 @@ public class ChefHomeFragment extends Fragment {
                 updateDishModelList.clear();
                 for (DataSnapshot snapshot1 : snapshot.getChildren()){
                     UpdateDishModel updateDishModel = snapshot1.getValue(UpdateDishModel.class);
+                    Log.d("DebugFoody", "Fetched UpdateDishModel: " + updateDishModel);
                     updateDishModelList.add(updateDishModel);
                 }
 

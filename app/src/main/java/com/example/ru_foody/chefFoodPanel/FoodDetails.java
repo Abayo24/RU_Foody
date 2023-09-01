@@ -1,75 +1,99 @@
 package com.example.ru_foody.chefFoodPanel;
 
+import com.google.firebase.database.PropertyName;
+
 public class FoodDetails {
 
-    private String Description, Quantity, Price, Dish, ImageURL, RandomUID, ChefId;
+    private String dish;
+    private String quantity;
+    private String price;
+    private String description;
+    private String imageURL;
+    private String randomUID;
+    private static String chefId;
 
     public FoodDetails() {
         // Default constructor required for Firebase Realtime Database
     }
-    public FoodDetails(String description, String quantity, String price, String dishes, String imageURL, String randomUID, String chefId) {
-        Description = description;
-        Quantity = quantity;
-        Price = price;
-        Dish = dishes;
-        ImageURL = imageURL;
-        RandomUID = randomUID;
-        ChefId = chefId;
+
+    public FoodDetails(String dish, String quantity, String price, String description, String imageURL, String randomUID, String chefId) {
+        this.dish = dish;
+        this.quantity = quantity;
+        this.price = price;
+        this.description = description;
+        this.imageURL = imageURL;
+        this.randomUID = randomUID;
+        this.chefId = chefId;
     }
 
+    @PropertyName("dish")
     public String getDish() {
-        return Dish;
+        return dish;
     }
 
-    public void setDish(String dish) {
-        Dish = dish;
+    @PropertyName("dish")
+    public void setDish(String dishes) {
+        dish = dishes;
     }
 
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String description) {
-        Description = description;
-    }
-
+    @PropertyName("quantity")
     public String getQuantity() {
-        return Quantity;
+        return quantity;
     }
 
+    @PropertyName("quantity")
     public void setQuantity(String quantity) {
-        Quantity = quantity;
+        quantity = quantity;
     }
 
+    @PropertyName("price")
     public String getPrice() {
-        return Price;
+        return price;
     }
 
+    @PropertyName("price")
     public void setPrice(String price) {
-        Price = price;
+        price = price;
     }
 
+    @PropertyName("description")
+    public String getDescription() {
+        return description;
+    }
+
+    @PropertyName("description")
+    public void setDescription(String description) {
+        description = description;
+    }
+
+
+    @PropertyName("imageURL")
     public String getImageURL() {
-        return ImageURL;
+        return imageURL;
     }
 
+    @PropertyName("imageURL")
     public void setImageURL(String imageURL) {
-        ImageURL = imageURL;
+        imageURL = imageURL;
     }
 
+    @PropertyName("randomUID")
     public String getRandomUID() {
-        return RandomUID;
+        return randomUID;
     }
 
+    @PropertyName("randomUID")
     public void setRandomUID(String randomUID) {
-        RandomUID = randomUID;
+        randomUID = randomUID;
     }
 
+    @PropertyName("chefId")
     public String getChefId() {
-        return ChefId;
+        return chefId;
     }
 
+    @PropertyName("chefId")
     public void setChefId(String chefId) {
-        ChefId = chefId;
+        chefId = chefId;
     }
 }

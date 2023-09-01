@@ -82,7 +82,7 @@ public class UpdateDelete_Dish extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Chef chef = snapshot.getValue(Chef.class);
                 assert chef != null;
-                fName = chef.getFName();
+                fName = chef.getFname();
                 emailid = chef.getEmailId();
                 mobileno = chef.getMobileNo();
 
@@ -145,45 +145,6 @@ public class UpdateDelete_Dish extends AppCompatActivity {
                     }
                 });
 
-                pickImageLauncher = registerForActivityResult(
-                        new ActivityResultContracts.StartActivityForResult(),
-                        result -> {
-                            if (result.getResultCode() == RESULT_OK) {
-                                Intent data = result.getData();
-                                if (data != null && data.getData() != null) {
-                                    imageUri = data.getData();
-                                    if (imageUri != null) {
-                                        startCropImageActivity();
-                                    } else {
-                                        Toast.makeText(UpdateDelete_Dish.this, "Failed to retrieve image URI.", Toast.LENGTH_SHORT).show();
-                                    }
-                                } else {
-                                    Toast.makeText(UpdateDelete_Dish.this, "Failed to retrieve image.", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-
-                cropImageLauncher = registerForActivityResult(
-                        new ActivityResultContracts.StartActivityForResult(),
-                        result -> {
-                            if (result.getResultCode() == RESULT_OK) {
-                                Intent data = result.getData();
-                                assert data != null;
-                                resultUri = UCrop.getOutput(data);
-                                if (resultUri != null) {
-                                    imageButton.setImageURI(resultUri);
-                                    Toast.makeText(UpdateDelete_Dish.this, "Cropped Successfully", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(UpdateDelete_Dish.this, "Failed to retrieve cropped image URI.", Toast.LENGTH_SHORT).show();
-                                }
-                            } else if (result.getResultCode() == UCrop.RESULT_ERROR) {
-                                assert result.getData() != null;
-                                final Throwable error = UCrop.getError(result.getData());
-                                assert error != null;
-                                Toast.makeText(UpdateDelete_Dish.this, "Cropping failed: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-
                 FAuth = FirebaseAuth.getInstance();
                 databaseReference = FirebaseDatabase.getInstance().getReference("FoodDetails");
                 storage = FirebaseStorage.getInstance();
@@ -197,6 +158,45 @@ public class UpdateDelete_Dish extends AppCompatActivity {
 
             }
         });
+
+        pickImageLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK) {
+                        Intent data = result.getData();
+                        if (data != null && data.getData() != null) {
+                            imageUri = data.getData();
+                            if (imageUri != null) {
+                                startCropImageActivity();
+                            } else {
+                                Toast.makeText(UpdateDelete_Dish.this, "Failed to retrieve image URI.", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(UpdateDelete_Dish.this, "Failed to retrieve image.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+        cropImageLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK) {
+                        Intent data = result.getData();
+                        assert data != null;
+                        resultUri = UCrop.getOutput(data);
+                        if (resultUri != null) {
+                            imageButton.setImageURI(resultUri);
+                            Toast.makeText(UpdateDelete_Dish.this, "Cropped Successfully", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(UpdateDelete_Dish.this, "Failed to retrieve cropped image URI.", Toast.LENGTH_SHORT).show();
+                        }
+                    } else if (result.getResultCode() == UCrop.RESULT_ERROR) {
+                        assert result.getData() != null;
+                        final Throwable error = UCrop.getError(result.getData());
+                        assert error != null;
+                        Toast.makeText(UpdateDelete_Dish.this, "Cropping failed: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void updatedesc(String dbUri) {

@@ -2,11 +2,15 @@ package com.example.ru_foody.customerFoodPanel;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,17 +36,19 @@ public class CustomerHomeFragment extends Fragment implements SwipeRefreshLayout
     String fName, mobileno, emailid;
     DatabaseReference dataRef, databaseReference;
     SwipeRefreshLayout swipeRefreshLayout;
+    SearchView searchView;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_customer_home, null);
         getActivity().setTitle("Home");
-        recyclerView = v.findViewById(R.id.recycleMenu);
+        setHasOptionsMenu(true);
+        recyclerView = v.findViewById(R.id.recycle_menu);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         updateDishModelList = new ArrayList<>();
-        swipeRefreshLayout = v.findViewById(R.id.swipeLayout);
+        swipeRefreshLayout = v.findViewById(R.id.swipelayout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.purple,R.color.purple_dark);
 
@@ -101,6 +107,39 @@ public class CustomerHomeFragment extends Fragment implements SwipeRefreshLayout
             public void onCancelled(@NonNull DatabaseError error) {
                 swipeRefreshLayout.setRefreshing(false);
 
+            }
+        });
+
+    }
+
+    private void search(String searchtext) {
+        ArrayList<UpdateDishModel> mylist = new ArrayList<>();
+        for (UpdateDishModel object : updateDishModelList) {
+            if (object.getDish().toLowerCase().contains(searchtext.toLowerCase())) {
+                mylist.add(object);
+            }
+        }
+        adapter = new CustomerHomeAdapter(getContext(), mylist);
+        recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.search, menu);
+        MenuItem menuItem = menu.findItem(R.id.Searchdish);
+        searchView = (SearchView) menuItem.getActionView();
+        searchView.setQueryHint("Search Dish");
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                search(newText);
+                return true;
             }
         });
     }

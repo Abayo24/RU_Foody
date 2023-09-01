@@ -4,18 +4,18 @@
     <item
         android:id="@+id/chefHome"
         android:icon="@drawable/baseline_home_24"
-        android:title="Home"></item>
+        android:title="Home" />
     <item
         android:id="@+id/pendingOrders"
         android:icon="@drawable/baseline_pending_actions_24"
-        android:title="Pending Orders"></item>
+        android:title="Pending Orders" />
     <item
         android:id="@+id/orders"
         android:icon="@drawable/baseline_orders_24"
-        android:title="Orders"></item>
+        android:title="Orders" />
     <item
         android:id="@+id/chefProfile"
         android:icon="@drawable/baseline_postdish_24"
-        android:title="Post Dish"></item>
+        android:title="Post Dish" />
 
 </menu>

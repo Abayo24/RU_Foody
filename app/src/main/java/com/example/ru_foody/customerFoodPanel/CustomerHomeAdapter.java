@@ -1,6 +1,7 @@
 package com.example.ru_foody.customerFoodPanel;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,10 +42,22 @@ public class CustomerHomeAdapter extends RecyclerView.Adapter<CustomerHomeAdapte
 
         final UpdateDishModel updateDishModel = updateDishModelList.get(position);
         Glide.with(mcontext).load(updateDishModel.getImageURL()).into(holder.imageView);
-        holder.dishName.setText(updateDishModel.getPrice());
+        holder.dishName.setText(updateDishModel.getDish());
         updateDishModel.getRandomUID();
         updateDishModel.getChefId();
         holder.Price.setText("Price: Ksh"+updateDishModel.getPrice());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent=new Intent(mcontext,OrderDish.class);
+                intent.putExtra("FoodMenu",updateDishModel.getRandomUID());
+                intent.putExtra("ChefId",updateDishModel.getChefId());
+
+
+                mcontext.startActivity(intent);
+            }
+        });
 
 
     }
