@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.ru_foody.Customer;
 import com.example.ru_foody.R;
 import com.example.ru_foody.chefFoodPanel.UpdateDishModel;
 import com.google.firebase.auth.FirebaseAuth;

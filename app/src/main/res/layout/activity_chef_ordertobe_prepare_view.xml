@@ -6,19 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".chefFoodPanel.ChefOrdertobePrepareView">
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/Recycle_viewOrder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/button1"
+        android:layout_marginBottom="10dp"
         android:scrollbars="vertical" />
-
 
     <LinearLayout
         android:id="@+id/button1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="31dp"
         android:orientation="vertical"
         android:visibility="invisible">
 
@@ -77,7 +79,7 @@
                 android:layout_height="35dp"
                 android:layout_marginLeft="15dp"
                 android:gravity="center_vertical"
-                android:text="NOTE:"
+                android:text="Note:"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="20dp"
@@ -115,8 +117,8 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center_vertical"
-                android:paddingLeft="5dp"
                 android:maxWidth="300dp"
+                android:paddingLeft="5dp"
                 android:text="Address"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
@@ -144,9 +146,8 @@
                 android:layout_marginBottom="10dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="5dp"
-                android:text="Mobile number"
                 android:textAllCaps="false"
-                android:textColor="@color/gray"
+                android:textColor="@color/black"
                 android:textSize="17dp"
                 android:textStyle="bold" />
 
@@ -155,7 +156,7 @@
         <Button
             android:id="@+id/preparing"
             android:layout_width="match_parent"
-            android:layout_height="38dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="70dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="70dp"

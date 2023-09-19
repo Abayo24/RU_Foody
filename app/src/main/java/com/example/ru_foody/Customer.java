@@ -1,4 +1,4 @@
-package com.example.ru_foody.customerFoodPanel;
+package com.example.ru_foody;
 
 public class Customer {
 

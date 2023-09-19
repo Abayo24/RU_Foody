@@ -15,9 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
+import com.example.ru_foody.Chef;
 import com.example.ru_foody.CustomerFoodPanel_BottomNavigation;
 import com.example.ru_foody.R;
-import com.example.ru_foody.chefFoodPanel.Chef;
 import com.example.ru_foody.chefFoodPanel.UpdateDishModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,14 +28,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
-import java.util.Objects;
 
 public class OrderDish extends AppCompatActivity {
 
     String RandomId, ChefID;
     ElegantNumberButton additem;
     ImageView imageView;
-//    ElegantNumberButton additem;
+
     TextView Foodname, ChefName, FoodQuantity, FoodPrice, FoodDescription;
     DatabaseReference databaseReference, dataaa, chefdata, reference, data, dataref;
     String State, City, Sub, dishname;
@@ -61,10 +60,10 @@ public class OrderDish extends AppCompatActivity {
         dataaa.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Customer customer = dataSnapshot.getValue(Customer.class);
-                String mobileNumber = Objects.requireNonNull(dataSnapshot.child("Mobile Number").getValue()).toString();
-                String email = Objects.requireNonNull(dataSnapshot.child("Email").getValue()).toString();
-                String fullName = Objects.requireNonNull(dataSnapshot.child("Full Name").getValue()).toString();
+//                Customer customer = dataSnapshot.getValue(Customer.class);
+//                String mobileNumber = Objects.requireNonNull(dataSnapshot.child("Mobile Number").getValue()).toString();
+//                String email = Objects.requireNonNull(dataSnapshot.child("Email").getValue()).toString();
+//                String fullName = Objects.requireNonNull(dataSnapshot.child("Full Name").getValue()).toString();
 
                 RandomId = getIntent().getStringExtra("FoodMenu");
                 ChefID = getIntent().getStringExtra("ChefId");

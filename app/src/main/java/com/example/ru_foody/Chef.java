@@ -1,4 +1,4 @@
-package com.example.ru_foody.chefFoodPanel;
+package com.example.ru_foody;
 
 import com.google.firebase.database.PropertyName;
 

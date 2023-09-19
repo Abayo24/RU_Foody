@@ -2,11 +2,10 @@ package com.example.ru_foody.chefFoodPanel;
 
 public class ChefWaitingOrders1 {
 
-    private String GrandTotalPrice,MobileNumber,Name,Note,RandomUID,Status;
+    private String Address,GrandTotalPrice,MobileNumber,Name,Note,RandomUID,Status;
 
-
-
-    public ChefWaitingOrders1(String grandTotalPrice, String mobileNumber, String name, String note, String randomUID, String status) {
+    public ChefWaitingOrders1(String address, String grandTotalPrice, String mobileNumber, String name, String note, String randomUID, String status) {
+        Address = address;
         GrandTotalPrice = grandTotalPrice;
         MobileNumber = mobileNumber;
         Name = name;
@@ -15,7 +14,17 @@ public class ChefWaitingOrders1 {
         Status = status;
     }
 
-    public ChefWaitingOrders1() {
+    public ChefWaitingOrders1()
+    {
+
+    }
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String address) {
+        Address = address;
     }
 
     public String getGrandTotalPrice() {

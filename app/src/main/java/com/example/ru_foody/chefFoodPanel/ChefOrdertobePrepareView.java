@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -117,6 +118,7 @@ public class ChefOrdertobePrepareView extends AppCompatActivity {
                                     for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                                         final ChefWaitingOrders chefWaitingOrders = dataSnapshot1.getValue(ChefWaitingOrders.class);
                                         HashMap<String, String> hashMap = new HashMap<>();
+                                        assert chefWaitingOrders != null;
                                         String dishid = chefWaitingOrders.getDishId();
                                         userid = chefWaitingOrders.getUserId();
                                         hashMap.put("ChefId", chefWaitingOrders.getChefId());
@@ -135,11 +137,15 @@ public class ChefOrdertobePrepareView extends AppCompatActivity {
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                             final ChefWaitingOrders1 chefWaitingOrders1 = dataSnapshot.getValue(ChefWaitingOrders1.class);
                                             HashMap<String, String> hashMap1 = new HashMap<>();
+                                            assert chefWaitingOrders1 != null;
+                                            hashMap1.put("Address", chefWaitingOrders1.getAddress());
                                             hashMap1.put("GrandTotalPrice", chefWaitingOrders1.getGrandTotalPrice());
                                             hashMap1.put("MobileNumber", chefWaitingOrders1.getMobileNumber());
                                             hashMap1.put("Name", chefWaitingOrders1.getName());
                                             hashMap1.put("RandomUID", RandomUID);
                                             hashMap1.put("Status", "Chef is preparing your Order...");
+                                            Log.d("DebugFoody", "Mobile Number: " + chefWaitingOrders1.getMobileNumber());
+
                                             FirebaseDatabase.getInstance().getReference("ChefFinalOrders").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(RandomUID).child("OtherInformation").setValue(hashMap1).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
@@ -227,10 +233,13 @@ public class ChefOrdertobePrepareView extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ChefWaitingOrders1 chefWaitingOrders1 = dataSnapshot.getValue(ChefWaitingOrders1.class);
-                grandtotal.setText("₹ " + chefWaitingOrders1.getGrandTotalPrice());
+                Log.d("DebugFoody","waiting orders"+ dataSnapshot);
+                assert chefWaitingOrders1 != null;
+                grandtotal.setText(String.format("Ksh %s", chefWaitingOrders1.getGrandTotalPrice()));
                 note.setText(chefWaitingOrders1.getNote());
+                address.setText(chefWaitingOrders1.getAddress());
                 name.setText(chefWaitingOrders1.getName());
-                number.setText("+91" + chefWaitingOrders1.getMobileNumber());
+                number.setText(String.format("+254%s", chefWaitingOrders1.getMobileNumber()));
 
             }
 

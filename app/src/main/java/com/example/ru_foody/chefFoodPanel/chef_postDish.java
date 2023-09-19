@@ -17,6 +17,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ru_foody.Chef;
 import com.example.ru_foody.R;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;

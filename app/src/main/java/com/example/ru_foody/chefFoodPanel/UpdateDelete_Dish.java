@@ -18,6 +18,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.ru_foody.Chef;
 import com.example.ru_foody.ChefFoodPanel_BottomNavigation;
 import com.example.ru_foody.R;
 import com.google.android.material.textfield.TextInputLayout;
@@ -133,7 +134,7 @@ public class UpdateDelete_Dish extends AppCompatActivity {
                         Objects.requireNonNull(quantity.getEditText()).setText(updateDishModel.getQuantity());
                         Objects.requireNonNull(price.getEditText()).setText(updateDishModel.getPrice());
                         Dishes = updateDishModel.getDish();
-                        dishName.setText("Dish Name:"+ updateDishModel.getDish());
+                        dishName.setText(String.format("Dish Name : %s", updateDishModel.getDish()));
                         Glide.with(UpdateDelete_Dish.this).load(updateDishModel.getImageURL()).into(imageButton);
                         dbUri = updateDishModel.getImageURL();
 

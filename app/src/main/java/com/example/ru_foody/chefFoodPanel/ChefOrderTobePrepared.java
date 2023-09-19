@@ -66,6 +66,9 @@ public class ChefOrderTobePrepared extends AppCompatActivity {
                         data.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                                String mobileNumber = Objects.requireNonNull(snapshot.child("Mobile Number").getValue()).toString();
+//                                String email = Objects.requireNonNull(snapshot.child("Email").getValue()).toString();
+//                                String fullName = Objects.requireNonNull(snapshot.child("Full Name").getValue()).toString();
                                 ChefWaitingOrders1 chefWaitingOrders1 = dataSnapshot.getValue(ChefWaitingOrders1.class);
                                 chefWaitingOrders1List.add(chefWaitingOrders1);
                                 adapter = new ChefOrderTobePreparedAdapter(ChefOrderTobePrepared.this, chefWaitingOrders1List);

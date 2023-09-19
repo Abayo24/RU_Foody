@@ -17,6 +17,8 @@ import com.example.ru_foody.CustomerFoodPanel_BottomNavigation;
 import com.example.ru_foody.DeliveryFoodPanel_BottomNavigation;
 import com.example.ru_foody.MainActivity;
 import com.example.ru_foody.R;
+import com.example.ru_foody.chefFoodPanel.ChefPreparedOrder;
+import com.example.ru_foody.customerFoodPanel.PayableOrders;
 
 import java.util.Random;
 
@@ -40,10 +42,10 @@ public class ShowNotification {
             acIntent = new Intent(context, ChefFoodPanel_BottomNavigation.class).putExtra("PAGE", "Orderpage");
             pendingIntent = PendingIntent.getActivity(context, 0, acIntent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
         }
-//        if (page.trim().equalsIgnoreCase("Payment")) {
-//            acIntent = new Intent(context, PayableOrders.class);
-//            pendingIntent = PendingIntent.getActivity(context, 0, acIntent, PendingIntent.FLAG_ONE_SHOT);
-//        }
+        if (page.trim().equalsIgnoreCase("Payment")) {
+            acIntent = new Intent(context, PayableOrders.class);
+            pendingIntent = PendingIntent.getActivity(context, 0, acIntent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
+        }
         if (page.trim().equalsIgnoreCase("Home")) {
             acIntent = new Intent(context, CustomerFoodPanel_BottomNavigation.class).putExtra("PAGE", "Homepage");
             pendingIntent = PendingIntent.getActivity(context, 0, acIntent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
@@ -72,10 +74,10 @@ public class ShowNotification {
             acIntent = new Intent(context, ChefFoodPanel_BottomNavigation.class).putExtra("PAGE", "AcceptOrderpage");
             pendingIntent = PendingIntent.getActivity(context, 0, acIntent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
         }
-//        if (page.trim().equalsIgnoreCase("RejectOrder")) {
-//            acIntent = new Intent(context, ChefPreparedOrder.class).putExtra("PAGE", "RejectOrderpage");
-//            pendingIntent = PendingIntent.getActivity(context, 0, acIntent, PendingIntent.FLAG_ONE_SHOT);
-//        }
+        if (page.trim().equalsIgnoreCase("RejectOrder")) {
+            acIntent = new Intent(context, ChefPreparedOrder.class).putExtra("PAGE", "RejectOrderpage");
+            pendingIntent = PendingIntent.getActivity(context, 0, acIntent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
+        }
         if (page.trim().equalsIgnoreCase("ThankYou")) {
             acIntent = new Intent(context, CustomerFoodPanel_BottomNavigation.class).putExtra("PAGE", "ThankYoupage");
             pendingIntent = PendingIntent.getActivity(context, 0, acIntent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);

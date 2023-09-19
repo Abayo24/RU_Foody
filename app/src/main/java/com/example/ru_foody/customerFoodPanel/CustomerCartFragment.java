@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ru_foody.Customer;
 import com.example.ru_foody.R;
 import com.example.ru_foody.ReusableCodeForAll;
 import com.example.ru_foody.SendNotification.APIService;
@@ -41,6 +42,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 import retrofit2.Call;
@@ -56,7 +58,7 @@ public class CustomerCartFragment extends Fragment {
     DatabaseReference databaseReference, data, reference, ref, getRef, dataa;
     public static TextView grandt;
     Button remove, placeorder;
-    String address, Addnote;
+    String address, Addnote, mobileNumber, fullName;
     String DishId, RandomUId, ChefId;
     private ProgressDialog progressDialog;
     private APIService apiService;
@@ -134,6 +136,8 @@ public class CustomerCartFragment extends Fragment {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             final Customer customer = dataSnapshot.getValue(Customer.class);
+                            mobileNumber = Objects.requireNonNull(dataSnapshot.child("Mobile Number").getValue()).toString();
+                            fullName = Objects.requireNonNull(dataSnapshot.child("Full Name").getValue()).toString();
                             placeorder.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -150,7 +154,7 @@ public class CustomerCartFragment extends Fragment {
                                             if (ss.trim().equalsIgnoreCase("false") || ss.trim().equalsIgnoreCase("")) {
 
                                                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                                                builder.setTitle("Enter Address");
+                                                builder.setTitle("Enter your location");
                                                 LayoutInflater inflater = getActivity().getLayoutInflater();
                                                 View view = inflater.inflate(R.layout.enter_address, null);
                                                 final EditText localaddress = view.findViewById(R.id.LA);
@@ -163,16 +167,15 @@ public class CustomerCartFragment extends Fragment {
                                                     @Override
                                                     public void onCheckedChanged(RadioGroup group, int checkedId) {
                                                         if (home.isChecked()) {
-
-                                                            localaddress.setText(customer.getMobileNo());
+                                                            assert customer != null;
+                                                            localaddress.getText();
                                                         } else if (other.isChecked()) {
-                                                            localaddress.getText().clear();
-                                                            Toast.makeText(getContext(), "check", Toast.LENGTH_SHORT).show();
+                                                            Toast.makeText(getContext(), "No Deliveries Outside Campus", Toast.LENGTH_SHORT).show();
                                                         }
                                                     }
                                                 });
 
-                                                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                                                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(DialogInterface dialog, int which) {
 
@@ -208,8 +211,8 @@ public class CustomerCartFragment extends Fragment {
                                                                         HashMap<String, String> hashMap1 = new HashMap<>();
                                                                         hashMap1.put("Address", address);
                                                                         hashMap1.put("GrandTotalPrice", String.valueOf(grandtotal));
-                                                                        hashMap1.put("MobileNumber", customer.getMobileNo());
-                                                                        hashMap1.put("Name", customer.getFullName());
+                                                                        hashMap1.put("MobileNumber", mobileNumber);
+                                                                        hashMap1.put("Name", fullName);
                                                                         hashMap1.put("Note", Addnote);
                                                                         FirebaseDatabase.getInstance().getReference("CustomerPendingOrders").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(RandomUId).child("OtherInformation").setValue(hashMap1).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                             @Override
@@ -250,6 +253,7 @@ public class CustomerCartFragment extends Fragment {
                                                                                                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                                                                                 CustomerPendingOrders1 customerPendingOrders1 = dataSnapshot.getValue(CustomerPendingOrders1.class);
                                                                                                                 HashMap<String, String> hashMap3 = new HashMap<>();
+                                                                                                                assert customerPendingOrders1 != null;
                                                                                                                 hashMap3.put("Address", customerPendingOrders1.getAddress());
                                                                                                                 hashMap3.put("GrandTotalPrice", customerPendingOrders1.getGrandTotalPrice());
                                                                                                                 hashMap3.put("MobileNumber", customerPendingOrders1.getMobileNumber());
@@ -328,7 +332,7 @@ public class CustomerCartFragment extends Fragment {
                                                         dialog.dismiss();
                                                     }
                                                 });
-                                                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                                                builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(DialogInterface dialog, int which) {
                                                         dialog.dismiss();
