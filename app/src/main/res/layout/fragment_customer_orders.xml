@@ -7,35 +7,78 @@
     android:orientation="vertical"
     tools:ignore="MissingDefaultResource">
 
-
-    <TextView
-        android:id="@+id/pendingorder"
+    <LinearLayout
+        android:id="@+id/input_fields"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_access_time_black_24dp"
-        android:drawablePadding="8dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
-        android:text="Pending Orders"
-        android:textColor="@color/black"
-        android:textSize="21dp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
 
+        <LinearLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/payableorder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_payment_black_24dp"
-        android:drawablePadding="8dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
-        android:text="Payable Orders"
-        android:textColor="@color/black"
-        android:textSize="21dp" />
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="start"
+                android:paddingTop="30dp"
+                android:contentDescription="@string/back"
+                app:srcCompat="@drawable/baseline_keyboard_backspace_24" />
+
+            <ImageView
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/back"
+                app:srcCompat="@drawable/confirmed" />
 
 
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/pendingorder"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/address"
+            android:drawableLeft="@drawable/ic_access_time_black_24dp"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:text="Pending Orders"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/payableorder"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/address"
+            android:padding="15dp"
+            android:drawableLeft="@drawable/baseline_attach_money_24"
+            android:drawablePadding="8dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:text="Payable Orders"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+    </LinearLayout>
 
 </LinearLayout>

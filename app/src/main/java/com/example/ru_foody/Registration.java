@@ -116,7 +116,7 @@ public class Registration extends AppCompatActivity {
                                                         dialog.dismiss();
 
                                                         String mobilenumber = Cpp.getSelectedCountryCodeWithPlus() + mobile;
-                                                        Intent intent = new Intent(Registration.this, VerifyPhone.class);
+                                                        Intent intent = new Intent(Registration.this, Login.class);
                                                         intent.putExtra("mobilenumber", mobilenumber);
                                                         startActivity(intent);
                                                     });

@@ -1,9 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:ignore="MissingDefaultResource">
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="start"
+            android:paddingTop="30dp"
+            android:contentDescription="@string/back"
+            app:srcCompat="@drawable/baseline_keyboard_backspace_24" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="30dp"
+            android:padding="20dp"
+            android:text="Ship Orders"
+            android:textColor="@color/purple"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/delishiporder"
@@ -11,4 +43,4 @@
         android:layout_height="match_parent"
         android:scrollbars="vertical" />
 
-</RelativeLayout>
+</LinearLayout>

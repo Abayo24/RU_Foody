@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -58,6 +59,7 @@ public class CustomerCartFragment extends Fragment {
     DatabaseReference databaseReference, data, reference, ref, getRef, dataa;
     public static TextView grandt;
     Button remove, placeorder;
+    ImageView Back;
     String address, Addnote, mobileNumber, fullName;
     String DishId, RandomUId, ChefId;
     private ProgressDialog progressDialog;
@@ -75,14 +77,17 @@ public class CustomerCartFragment extends Fragment {
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.setCancelable(false);
         cartModelList = new ArrayList<>();
+        Back = v.findViewById(R.id.back);
         grandt = v.findViewById(R.id.GT);
         remove = v.findViewById(R.id.RM);
         placeorder = v.findViewById(R.id.PO);
         TotalBtns = v.findViewById(R.id.TotalBtns);
         apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
         customercart();
+
         return v;
     }
+
 
     private void customercart() {
 
@@ -376,6 +381,7 @@ public class CustomerCartFragment extends Fragment {
         });
 
     }
+
 
 
     private void sendNotifications(String usertoken, String title, String message, String order) {

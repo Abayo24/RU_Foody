@@ -7,11 +7,28 @@
     tools:menu="@menu/search"
     tools:context=".customerFoodPanel.PendingOrders">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/Recycleorders"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/searchbar"
-        android:orientation="vertical" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:padding="15dp"
+            android:text="Pending Orders"
+            android:textColor="@color/purple"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/Recycleorders"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" />
+    </LinearLayout>
 
 </RelativeLayout>

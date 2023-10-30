@@ -3,6 +3,7 @@ package com.example.ru_foody.customerFoodPanel;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,38 +28,39 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class CustomerProfileFragment extends Fragment {
 
-    EditText fName, mobile;
+    EditText fName;
     TextView mobileno, Email;
     Button Update;
     LinearLayout password, LogOut;
     DatabaseReference databaseReference, data;
     FirebaseDatabase firebaseDatabase;
-    String email, passwordd, confirmpass, mobilenoo;
+    String email, passwordd, confirmpass;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_customer_profile, null);
-        getActivity().setTitle("Profile");
+        requireActivity().setTitle("Profile");
 
-        fName = (EditText) v.findViewById(R.id.fnamee);
-        mobile = (EditText) v.findViewById(R.id.address);
-        Email = (TextView) v.findViewById(R.id.emailID);
-        mobileno = (TextView) v.findViewById(R.id.mobilenumber);
-        Update = (Button) v.findViewById(R.id.update);
-        password = (LinearLayout) v.findViewById(R.id.passwordlayout);
-        LogOut = (LinearLayout) v.findViewById(R.id.logout_layout);
+        fName = v.findViewById(R.id.fnamee);
+        mobileno = v.findViewById(R.id.mobilenumber);
+        Email = v.findViewById(R.id.emailID);
+        Update = v.findViewById(R.id.update);
+        password = v.findViewById(R.id.passwordlayout);
+        LogOut = v.findViewById(R.id.logout_layout);
 
-        String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String userid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         databaseReference = FirebaseDatabase.getInstance().getReference("Customer").child(userid);
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                final Customer customer = dataSnapshot.getValue(Customer.class);
-
+                Log.d("Debugfoody","onDataChange" + dataSnapshot);
+                Customer customer = dataSnapshot.getValue(Customer.class);
+                assert customer != null;
                 fName.setText(customer.getFullName());
                 mobileno.setText(customer.getMobileNo());
                 Email.setText(customer.getEmail());
@@ -82,29 +84,30 @@ public class CustomerProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String useridd = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                String useridd = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
                 data = FirebaseDatabase.getInstance().getReference("Customer").child(useridd);
                 data.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        Customer customer = dataSnapshot.getValue(Customer.class);
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Log.d("Debugfoody","onDataChange"+ snapshot);
+                        Customer customer = snapshot.getValue(Customer.class);
 
+                        assert customer != null;
                         confirmpass = customer.getConfirmPassword();
                         email = customer.getEmail();
                         passwordd = customer.getPassword();
-                        mobilenoo = customer.getMobileNo();
+                        long mobileno = Long.parseLong(customer.getMobileNo());
 
                         String Fname = fName.getText().toString().trim();
-                        String Mobile = mobile.getText().toString().trim();
 
                         HashMap<String, String> hashMappp = new HashMap<>();
-                        hashMappp.put("ConfirmPassword", confirmpass);
-                        hashMappp.put("EmailID", email);
-                        hashMappp.put("FirstName", Fname);
-                        hashMappp.put("Mobileno", String.valueOf(mobilenoo));
+                        hashMappp.put("Confirm Password", confirmpass);
+                        hashMappp.put("Email", email);
+                        hashMappp.put("Full Name", Fname);
+                        hashMappp.put("Mobile Number", String.valueOf(mobileno));
                         hashMappp.put("Password", passwordd);
-                        hashMappp.put("Number", Mobile);
-                        firebaseDatabase.getInstance().getReference("Customer").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(hashMappp);
+
+                        FirebaseDatabase.getInstance().getReference("Customer").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(hashMappp);
                     }
 
                     @Override

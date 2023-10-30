@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-         button = findViewById(R.id.orderNbutton);
 //AutoSignin
         new Handler().postDelayed(() -> {
 
@@ -90,6 +89,6 @@ public class MainActivity extends AppCompatActivity {
 
         },3000);
 
-        button.setOnClickListener(v -> startActivity(new Intent(MainActivity.this,MainMenu.class)));
+//
     }
 }

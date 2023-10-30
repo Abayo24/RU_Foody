@@ -1,5 +1,6 @@
 package com.example.ru_foody.customerFoodPanel;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.ru_foody.Customer;
+import com.example.ru_foody.Login;
 import com.example.ru_foody.R;
 import com.example.ru_foody.chefFoodPanel.UpdateDishModel;
 import com.google.firebase.auth.FirebaseAuth;
@@ -64,10 +66,16 @@ public class CustomerHomeFragment extends Fragment implements SwipeRefreshLayout
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                         Customer customer = snapshot.getValue(Customer.class);
-                        fName = customer.getFullName();
-                        mobileno = customer.getMobileNo();
-                        emailid = customer.getEmail();
-                        customerMenu();
+                        if(customer != null) {
+                            fName = customer.getFullName();
+                            mobileno = customer.getMobileNo();
+                            emailid = customer.getEmail();
+                            customerMenu();
+                        }
+                        else {
+                            Intent loginIntent = new Intent(getActivity(),Login.class);
+                            startActivity(loginIntent);
+                            getActivity().finish();}
 
                     }
 

@@ -54,8 +54,6 @@ public class Delivery_ShippingOrder extends AppCompatActivity {
         MobileNumber = (TextView) findViewById(R.id.ShipNumber1);
         Custname = (TextView) findViewById(R.id.ShipName1);
         l1 = (LinearLayout) findViewById(R.id.linear3);
-        l2 = (LinearLayout) findViewById(R.id.linearl1);
-        Call = (Button) findViewById(R.id.call2);
         Shipped = (Button) findViewById(R.id.shipped2);
         apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
         Shipped();

@@ -3,12 +3,14 @@ package com.example.ru_foody;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainMenu extends AppCompatActivity {
 
-    Button signinemail, signinphone, signup;
+    Button signinemail, signinphone;
+    TextView signup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

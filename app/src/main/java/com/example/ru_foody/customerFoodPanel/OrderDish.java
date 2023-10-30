@@ -74,11 +74,11 @@ public class OrderDish extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         UpdateDishModel updateDishModel = dataSnapshot.getValue(UpdateDishModel.class);
                         Foodname.setText(updateDishModel.getDish());
-                        String qua = "<b>" + "Quantity: " + "</b>" + updateDishModel.getQuantity();
+                        String qua = "<b>" + "In Stock" + "</b>" +"<br>" + updateDishModel.getQuantity();
                         FoodQuantity.setText(Html.fromHtml(qua));
-                        String ss = "<b>" + "Description: " + "</b>" + updateDishModel.getDescription();
+                        String ss = "<b>" + "Description" + "</b>" +"<br>" + updateDishModel.getDescription();
                         FoodDescription.setText(Html.fromHtml(ss));
-                        String pri = "<b>" + "Price: Ksh" + "</b>" + updateDishModel.getPrice();
+                        String pri = "<b>" + updateDishModel.getPrice() + "/-" + "</b>";
                         FoodPrice.setText(Html.fromHtml(pri));
                         Glide.with(OrderDish.this).load(updateDishModel.getImageURL()).into(imageView);
 
@@ -89,7 +89,7 @@ public class OrderDish extends AppCompatActivity {
                                 Chef chef = dataSnapshot.getValue(Chef.class);
 
                                 assert chef != null;
-                                String name = "<b>" + "Chef Name: " + "</b>" + chef.getFname();
+                                String name = "<b>" + "Chef Name" + "</b>" +"<br>" + chef.getFname();
                                 ChefName.setText(Html.fromHtml(name));
                                 custID = FirebaseAuth.getInstance().getCurrentUser().getUid();
                                 databaseReference = FirebaseDatabase.getInstance().getReference("Cart").child("CartItems").child(custID).child(RandomId);

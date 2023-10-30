@@ -1,5 +1,7 @@
 package com.example.ru_foody.SendNotification;
 
+import static com.example.ru_foody.SendNotification.ShowNotification.ShowNotif;
+
 import androidx.annotation.NonNull;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -16,6 +18,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         message = remoteMessage.getData().get("Message");
         typepage = remoteMessage.getData().get("Typepage");
 
-        ShowNotification.ShowNotif(getApplicationContext(),title,message,typepage);
+        ShowNotif(getApplicationContext(),title,message,typepage);
     }
 }

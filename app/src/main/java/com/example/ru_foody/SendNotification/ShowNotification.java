@@ -88,8 +88,9 @@ public class ShowNotification {
         }
 
 
-        NotificationCompat.Builder nBuilder = new NotificationCompat.Builder(context, CHANNEL_ID).setSmallIcon(R.drawable.ic_chef_hat_and_fork)
-                .setColor(ContextCompat.getColor(context, R.color.Red))
+        NotificationCompat.Builder nBuilder = new NotificationCompat.Builder(context, CHANNEL_ID)
+                .setSmallIcon(R.drawable.logo)
+                .setColor(ContextCompat.getColor(context, R.color.purple))
                 .setContentTitle(title)
                 .setContentText(message)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
