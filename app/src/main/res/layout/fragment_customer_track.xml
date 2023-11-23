@@ -41,18 +41,26 @@
         android:orientation="vertical" />
 
     <TextView
-        android:id="@+id/addresstrack"
+        android:id="@+id/textViewlocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@color/white"
-        android:gravity="center"
-        android:inputType="textMultiLine"
+        android:layout_marginTop="50dp"
+        android:text="Your Location"
+        android:textColor="@color/purple"
+        android:textSize="25sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/addresstrack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center_vertical"
+        android:layout_gravity="center"
+        android:padding="10dp"
         android:outlineProvider="background"
-        android:paddingLeft="15dp"
-        android:text="Address"
+        android:text="Nothing to Show!"
         android:textColor="@color/black"
         android:textSize="18dp"
         android:visibility="visible" />
@@ -73,13 +81,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:background="@color/white"
         android:gravity="center_vertical"
         android:layout_gravity="center"
-        android:inputType="textMultiLine"
         android:maxWidth="300dp"
         android:padding="10dp"
-        android:text="Status"
+        android:text="Nothing to Show!"
         android:textAllCaps="false"
         android:textColor="@color/black"
         android:textSize="18sp" />

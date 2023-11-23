@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +29,7 @@ public class DeliveryShipOrderFragment extends Fragment {
     private List<DeliveryShipFinalOrders1> deliveryShipFinalOrders1List;
     private DeliveryShipOrderFragmentAdapter adapter;
     private DatabaseReference databaseReference;
+    private TextView noOrderTextView;
 
     @Nullable
     @Override
@@ -38,6 +40,8 @@ public class DeliveryShipOrderFragment extends Fragment {
         recyclerView = view.findViewById(R.id.delishiporder);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        noOrderTextView = view.findViewById(R.id.noOrder1);
+        noOrderTextView.setVisibility(View.INVISIBLE);
         deliveryShipFinalOrders1List = new ArrayList<>();
         DeliveryShipfinalOrder();
         return view;
@@ -49,23 +53,27 @@ public class DeliveryShipOrderFragment extends Fragment {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                deliveryShipFinalOrders1List.clear();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    DatabaseReference data = FirebaseDatabase.getInstance().getReference("DeliveryShipFinalOrders").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(snapshot.getKey()).child("OtherInformation");
-                    data.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            DeliveryShipFinalOrders1 deliveryShipFinalOrders1 = dataSnapshot.getValue(DeliveryShipFinalOrders1.class);
-                            deliveryShipFinalOrders1List.add(deliveryShipFinalOrders1);
-                            adapter = new DeliveryShipOrderFragmentAdapter(getContext(), deliveryShipFinalOrders1List);
-                            recyclerView.setAdapter(adapter);
-                        }
+                if (dataSnapshot.exists()) {
+                    deliveryShipFinalOrders1List.clear();
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        DatabaseReference data = FirebaseDatabase.getInstance().getReference("DeliveryShipFinalOrders").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(snapshot.getKey()).child("OtherInformation");
+                        data.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                DeliveryShipFinalOrders1 deliveryShipFinalOrders1 = dataSnapshot.getValue(DeliveryShipFinalOrders1.class);
+                                deliveryShipFinalOrders1List.add(deliveryShipFinalOrders1);
+                                adapter = new DeliveryShipOrderFragmentAdapter(getContext(), deliveryShipFinalOrders1List);
+                                recyclerView.setAdapter(adapter);
+                            }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                        }
-                    });
+                            }
+                        });
+                    }
+                }else {
+                    noOrderTextView.setVisibility(View.VISIBLE);
                 }
             }
 

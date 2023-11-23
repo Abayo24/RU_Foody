@@ -110,6 +110,7 @@ public class DeliveryShipOrderFragmentAdapter extends RecyclerView.Adapter<Deliv
             @Override
             public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
                 if (response.code() == 200) {
+                    assert response.body() != null;
                     if (response.body().success != 1) {
                         Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
                     }

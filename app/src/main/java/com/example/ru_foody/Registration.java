@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ru_foody.ReusableCode.ReusableCodeForAll;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -116,7 +117,7 @@ public class Registration extends AppCompatActivity {
                                                         dialog.dismiss();
 
                                                         String mobilenumber = Cpp.getSelectedCountryCodeWithPlus() + mobile;
-                                                        Intent intent = new Intent(Registration.this, Login.class);
+                                                        Intent intent = new Intent(Registration.this, VerifyPhone.class);
                                                         intent.putExtra("mobilenumber", mobilenumber);
                                                         startActivity(intent);
                                                     });

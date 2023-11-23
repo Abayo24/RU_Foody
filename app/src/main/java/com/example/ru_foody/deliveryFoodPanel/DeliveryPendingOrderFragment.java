@@ -9,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,7 +38,9 @@ public class DeliveryPendingOrderFragment extends Fragment {
     private DatabaseReference databaseReference;
     private SwipeRefreshLayout swipeRefreshLayout;
 
-    String deliveryId = "Z6jvbMR2KcNsV8sUHi8cMLs1qHt2";
+    String deliveryId = "TkEtebxtsAfAEu8eXyY36tTkaYA2";
+    private TextView noOrderTextView;
+
 
 
     @Nullable
@@ -50,6 +53,9 @@ public class DeliveryPendingOrderFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         deliveryShipOrders1List = new ArrayList<>();
+        noOrderTextView = view.findViewById(R.id.noOrder);
+        noOrderTextView.setVisibility(View.INVISIBLE); // Initially invisible
+
         swipeRefreshLayout = view.findViewById(R.id.Swipe);
         swipeRefreshLayout.setColorSchemeResources(R.color.purple, R.color.purple);
         adapter = new DeliveryPendingOrderFragmentAdapter(getContext(), deliveryShipOrders1List);
@@ -93,7 +99,6 @@ public class DeliveryPendingOrderFragment extends Fragment {
                                 recyclerView.setAdapter(adapter);
                                 swipeRefreshLayout.setRefreshing(false);
                             }
-
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -102,6 +107,7 @@ public class DeliveryPendingOrderFragment extends Fragment {
 
                     }
                 } else {
+                    noOrderTextView.setVisibility(View.VISIBLE);
                     swipeRefreshLayout.setRefreshing(false);
                 }
 

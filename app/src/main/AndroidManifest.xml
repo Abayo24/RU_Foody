@@ -27,6 +27,7 @@
         <activity
             android:name=".deliveryFoodPanel.Delivery_ShippingOrder"
             android:exported="false" />
+        
         <activity
             android:name=".deliveryFoodPanel.DeliveryShipOrderView"
             android:exported="false" />

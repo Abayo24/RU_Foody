@@ -87,7 +87,7 @@ public class ShowNotification {
             pendingIntent = PendingIntent.getActivity(context, 0, acIntent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
         }
 
-
+        //build notifications
         NotificationCompat.Builder nBuilder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.logo)
                 .setColor(ContextCompat.getColor(context, R.color.purple))

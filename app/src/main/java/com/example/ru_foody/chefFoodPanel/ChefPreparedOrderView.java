@@ -57,7 +57,7 @@ public class ChefPreparedOrderView extends AppCompatActivity {
     private APIService apiService;
     Spinner Shipper;
 
-    String deliveryId = "Z6jvbMR2KcNsV8sUHi8cMLs1qHt2";
+    String deliveryId = "TkEtebxtsAfAEu8eXyY36tTkaYA2";
 
 
     @Override

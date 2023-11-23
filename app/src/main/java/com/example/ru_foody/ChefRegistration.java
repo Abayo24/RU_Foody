@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ru_foody.ReusableCode.ReusableCodeForAll;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -72,7 +73,7 @@ public class ChefRegistration extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ChefRegistration.this);
                 builder.setCancelable(false);
 
-// Set a custom layout for the dialog
+                // Set a custom layout for the dialog
                 LayoutInflater inflater = getLayoutInflater();
                 View dialogView = inflater.inflate(R.layout.progress_dialog, null);
                 builder.setView(dialogView);
@@ -117,7 +118,7 @@ public class ChefRegistration extends AppCompatActivity {
                                                         dialog.dismiss();
 
                                                         String mobilenumber = Cpp.getSelectedCountryCodeWithPlus() + mobile;
-                                                        Intent intent = new Intent(ChefRegistration.this, ChefLoginPhone.class);
+                                                        Intent intent = new Intent(ChefRegistration.this, ChefVerifyPhone.class);
                                                         intent.putExtra("mobilenumber", mobilenumber);
                                                         startActivity(intent);
                                                     });
@@ -156,6 +157,7 @@ public class ChefRegistration extends AppCompatActivity {
 
     String emailpattern = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}";
     public boolean isValid(){
+        //These lines disable error messages and clear any existing errors for the corresponding input fields.
         chname.setErrorEnabled(false);
         chname.setError("");
         chmobile.setErrorEnabled(false);

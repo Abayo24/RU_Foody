@@ -63,8 +63,6 @@
                             android:layout_width="200dp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="20dp"
-                            android:hint="Change name here"
-                            android:inputType="text"
                             android:gravity="end"
                             android:textSize="17sp" />
 
@@ -107,8 +105,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="20dp"
                             android:gravity="end"
-                            android:textColor="@color/gray"
-                            android:textSize="16sp" />
+                            android:textSize="17sp" />
 
                     </LinearLayout>
                 </LinearLayout>

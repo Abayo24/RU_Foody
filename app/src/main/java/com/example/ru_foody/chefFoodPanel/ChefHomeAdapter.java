@@ -20,6 +20,7 @@ public class ChefHomeAdapter extends RecyclerView.Adapter<ChefHomeAdapter.ViewHo
     private final Context mcont;
     private final List<UpdateDishModel> updateDishModelList;
 
+    //binds data from a list of UpdateDishModel objects to views within a RecyclerView
     public ChefHomeAdapter(Context context, List<UpdateDishModel>updateDishModelList){
         this.updateDishModelList = updateDishModelList;
         this.mcont = context;
@@ -47,6 +48,7 @@ public class ChefHomeAdapter extends RecyclerView.Adapter<ChefHomeAdapter.ViewHo
 
     }
 
+    //returns the total number of items in the dataset
     @Override
     public int getItemCount() {
         return updateDishModelList.size();

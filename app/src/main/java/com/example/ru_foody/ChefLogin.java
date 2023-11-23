@@ -55,7 +55,7 @@ public class ChefLogin extends AppCompatActivity {
                     AlertDialog.Builder builder = new AlertDialog.Builder(ChefLogin.this);
                     builder.setCancelable(false);
 
-// Set a custom layout for the dialog
+                    // Set a custom layout for the dialog
                     LayoutInflater inflater = getLayoutInflater();
                     View dialogView = inflater.inflate(R.layout.progress_dialog, null);
                     builder.setView(dialogView);
@@ -103,11 +103,13 @@ public class ChefLogin extends AppCompatActivity {
     String emailpattern = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}";
 
     public boolean isValid(){
+        // Clear any previous error messages
         email.setErrorEnabled(false);
         email.setError("");
         password.setErrorEnabled(false);
         password.setError("");
 
+        // Initialize variables to track email and password validity
         boolean isValid, isValid_email = false, isValid_password = false;
         if (TextUtils.isEmpty(email_id)){
             email.setErrorEnabled(true);

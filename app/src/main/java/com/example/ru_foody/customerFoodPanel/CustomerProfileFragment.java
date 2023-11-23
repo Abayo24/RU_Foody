@@ -40,8 +40,8 @@ public class CustomerProfileFragment extends Fragment {
     FirebaseDatabase firebaseDatabase;
     String email, passwordd, confirmpass;
 
-    @Nullable
-    @Override
+    @Nullable // may return null
+    @Override // may be be overridden by a subclass
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_customer_profile, null);
         requireActivity().setTitle("Profile");
@@ -61,10 +61,9 @@ public class CustomerProfileFragment extends Fragment {
                 Log.d("Debugfoody","onDataChange" + dataSnapshot);
                 Customer customer = dataSnapshot.getValue(Customer.class);
                 assert customer != null;
+                Email.setText(customer.getEmail());
                 fName.setText(customer.getFullName());
                 mobileno.setText(customer.getMobileNo());
-                Email.setText(customer.getEmail());
-
             }
 
             @Override

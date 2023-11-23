@@ -4,29 +4,29 @@ import com.google.firebase.database.PropertyName;
 
 public class Chef {
 
-    public String fname, emailId, mobileNo, password, confirmPassword, chefId;
+    private String confirmPassword, emailId,fname, mobileNo, password, chefId;
 
     public Chef() {
         // Default constructor
     }
 
-    public Chef(String fname, String emailId, String mobileNo, String password, String confirmPassword, String chefId) {
-        this.fname = fname;
+    public Chef(String confirmPassword, String emailId, String fname, String mobileNo, String password,  String chefId) {
+        this.confirmPassword = confirmPassword;
         this.emailId = emailId;
+        this.fname = fname;
         this.mobileNo = mobileNo;
         this.password = password;
-        this.confirmPassword = confirmPassword;
         this.chefId = chefId;
     }
 
-    @PropertyName("Full Name")
-    public String getFname() {
-        return fname;
+    @PropertyName("Confirm Password")
+    public String getConfirmPassword() {
+        return confirmPassword;
     }
 
-    @PropertyName("Full Name")
-    public void setFname(String fname) {
-        this.fname = fname;
+    @PropertyName("Confirm Password")
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     @PropertyName("Email")
@@ -39,6 +39,16 @@ public class Chef {
         this.emailId = emailId;
     }
 
+    @PropertyName("Full Name")
+    public String getFname() {
+        return fname;
+    }
+
+    @PropertyName("Full Name")
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
     @PropertyName("Mobile Number")
     public String getMobileNo() {
         return mobileNo;
@@ -49,24 +59,14 @@ public class Chef {
         this.mobileNo = mobileNo;
     }
 
-
+    @PropertyName("Password")
     public String getPassword() {
         return password;
     }
 
-
+    @PropertyName("Password")
     public void setPassword(String password) {
         this.password = password;
-    }
-
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
     }
 
     public String getChefId() {

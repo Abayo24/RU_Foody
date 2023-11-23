@@ -38,6 +38,7 @@ public class ChefSendOtp extends AppCompatActivity {
         setContentView(R.layout.activity_chef_send_otp);
 
         mobile = getIntent().getStringExtra("mobilenumber").trim();
+        sendVerificationCode(mobile);
 
         enter_code = findViewById(R.id.code);
         verify = findViewById(R.id.verify);
@@ -48,12 +49,10 @@ public class ChefSendOtp extends AppCompatActivity {
         resend.setVisibility(View.INVISIBLE);
         txt.setVisibility(View.INVISIBLE);
 
-        sendVerificationCode(mobile);
-
         verify.setOnClickListener(v -> {
 
-            String code = Objects.requireNonNull(enter_code.getEditText()).getText().toString().trim();
             resend.setVisibility(View.INVISIBLE);
+            String code = Objects.requireNonNull(enter_code.getEditText()).getText().toString().trim();
 
             if (code.length() == 0 || code.length() < 6){
                 enter_code.setError("Enter Code");
@@ -110,6 +109,24 @@ public class ChefSendOtp extends AppCompatActivity {
         sendVerificationCode(mobile_num);
     }
 
+    private void verifyCode(String code) {
+
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verification_id, code);
+        signInWithCredential(credential);
+    }
+
+    private void signInWithCredential(PhoneAuthCredential credential) {
+        FAuth.signInWithCredential(credential)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()){
+                        startActivity(new Intent(ChefSendOtp.this, ChefFoodPanel_BottomNavigation.class));
+                        finish();
+                    }else{
+                        ReusableCodeForAll.ShowAlert(ChefSendOtp.this, "Error", Objects.requireNonNull(task.getException()).getMessage());
+                    }
+                });
+    }
+
     private void sendVerificationCode(String number) {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
@@ -125,6 +142,13 @@ public class ChefSendOtp extends AppCompatActivity {
     }
 
     private final PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallBack = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+        @Override
+        public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+            super.onCodeSent(s, forceResendingToken);
+
+            verification_id = s;
+        }
         @Override
         public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
 
@@ -142,30 +166,7 @@ public class ChefSendOtp extends AppCompatActivity {
 
         }
 
-        @Override
-        public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-            super.onCodeSent(s, forceResendingToken);
-
-            verification_id = s;
-        }
     };
 
-    private void verifyCode(String code) {
-
-        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verification_id, code);
-        signInWithPhone(credential);
-    }
-
-    private void signInWithPhone(PhoneAuthCredential credential) {
-        FAuth.signInWithCredential(credential)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()){
-                        startActivity(new Intent(ChefSendOtp.this, ChefFoodPanel_BottomNavigation.class));
-                        finish();
-                    }else{
-                        ReusableCodeForAll.ShowAlert(ChefSendOtp.this, "Error", Objects.requireNonNull(task.getException()).getMessage());
-                    }
-                });
-    }
 
 }

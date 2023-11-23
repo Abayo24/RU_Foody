@@ -90,7 +90,6 @@ public class chef_postDish extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                     Chef chef = snapshot.getValue(Chef.class);
-                    assert chef != null;
                     fName = chef.getFname();
                     emailid = chef.getEmailId();
                     mobileno = chef.getMobileNo();
